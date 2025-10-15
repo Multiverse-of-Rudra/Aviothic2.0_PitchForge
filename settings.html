@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Senior Sync — Settings</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <div class="brand">
+    <img id="site-logo" class="logo-img" src="C:\Users\Dell\Desktop\seniorsynclogo.jpg" alt="seniorsynclogo" />
+        <div>
+          <h1>Senior Sync</h1>
+          <p class="tagline">Settings & caregiver contacts</p>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="events.html">Events</a>
+        <a href="settings.html">Settings</a>
+        <a href="about.html" class="cta">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Settings</h2>
+        <div class="card">
+          <label>Alert sensitivity</label>
+          <select id="sensitivity">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div class="card">
+          <h3>Caregiver contacts</h3>
+          <p>Add one or more caregiver phone numbers or emails (demo stores locally).</p>
+          <div class="controls">
+            <input id="contact-input" placeholder="Phone or email" />
+            <button id="add-contact">Add</button>
+          </div>
+          <ul id="contact-list" class="events-list"></ul>
+        </div>
+        <div class="card">
+          <h3>Branding</h3>
+          <p>Upload a small logo (PNG) to appear in the app header. Stored locally for this device.</p>
+          <input type="file" id="logo-input" accept="image/*" />
+          <div id="logo-preview" style="margin-top:8px"></div>
+          <div class="controls" style="margin-top:8px">
+            <button id="remove-logo" class="secondary">Remove Logo</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Or use a local file path</h3>
+          <p>You can paste an absolute path to an image on this machine (Windows example):</p>
+          <input id="logo-path-input" placeholder="C:\\Users\\Dell\\Desktop\\seniorsynclogo.jpg" />
+          <div class="controls" style="margin-top:8px">
+            <button id="set-logo-path" class="button">Use path</button>
+            <button id="remove-logo-path" class="secondary">Remove path</button>
+          </div>
+          <p class="muted">Note: Browser security may restrict access to local paths in some setups. Opening `index.html` directly (file:///) in your browser usually allows loading local files.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <small>Senior Sync — Web prototype for older adults & caregivers.</small>
+      </div>
+      <div class="credits">Tech: TFLite • Android sensors • Twilio (alerts) • Privacy-first</div>
+    </footer>
+  </div>
+
+<script src="app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const select = document.getElementById('sensitivity');
+    const contactList = document.getElementById('contact-list');
+    function renderContacts(){
+      const contacts = SeniorSync.getContacts();
+      contactList.innerHTML = contacts.length? contacts.map(c=>`<li>${c} <button class=\"secondary small\" data-contact=\"${c}\">Remove</button></li>`).join('') : '<li class="muted">No contacts added.</li>'
+      Array.from(document.querySelectorAll('[data-contact]')).forEach(btn=>btn.onclick=()=>{ SeniorSync.removeContact(btn.dataset.contact); renderContacts(); })
+    }
+    select.value = SeniorSync.getSettings().sensitivity || 'medium';
+    select.onchange = ()=> SeniorSync.updateSettings({sensitivity: select.value});
+
+    document.getElementById('add-contact').onclick = ()=>{
+      const v = document.getElementById('contact-input').value.trim();
+      if(v) { SeniorSync.addContact(v); document.getElementById('contact-input').value=''; renderContacts(); }
+    }
+    renderContacts();
+  })
+</script>
+</body>
+</html>

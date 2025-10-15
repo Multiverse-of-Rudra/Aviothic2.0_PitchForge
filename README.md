@@ -1,45 +1,95 @@
-# SeniorSync
+# Senior Sync — Web Prototype
 
-**Tagline:**
-> When silence becomes a cry for help — SeniorSync listens.
-**Team name-Pitchforge"
-> members:
-> sahil gautam
-> sarthak kushwaha
-> prankur verma
-> Rudra Mohan Mishra(Team Leader)
+When silence becomes a cry for help — Senior Sync listens.
 
-## Overview
-SeniorSync is an AI-powered guardian app for elderly safety. It detects emergencies (falls, silence, distress) using your phone’s sensors and microphone, and automatically alerts caregivers if something’s wrong.
+Senior Sync is a privacy-first web prototype built to explore how on-device sensor fusion and lightweight ML can help older adults and their caregivers detect potential emergencies at home and respond quickly.
 
-## Features
-- Detects falls and immobility using accelerometer/gyroscope
-- Listens for abnormal silence, distress, or calls for help
-- Learns daily sound/motion patterns and flags deviations
--- Sends SMS/voice alerts with location/context via Twilio
-- Gentle voice prompt before escalation
-- All processing on-device for privacy
+Contents
+- `index.html` — landing page and interactive demo UI
+- `style.css` — styles and responsive layout
+- `app.js` — demo logic (detection simulation, voice prompt, and escalation)
+- `screenshots/` — optional UI snapshots
 
-## User Flow
-1. **Passive Monitoring:** Runs in background, collects sensor/audio data
-2. **Anomaly Detection:** AI/ML model flags unusual patterns
-3. **Context Verification:** App asks user if they’re okay
-4. **Emergency Response:** If no response, sends alert to caregivers
+Quick start (no server required)
+1. Open `index.html` in your browser.
+2. Click a simulation button: **Simulate Fall**, **Simulate Silence**, or **Simulate Breathing**.
+3. When the voice prompt appears, click **I'm fine** to cancel or **No response** to simulate escalation.
 
-## Tech Stack
-- **AI/ML:** TensorFlow Lite (on-device)
-- **Sensors:** Android accelerometer, gyroscope, microphone
-- **App:** Kotlin (Android)
-- **Alerts:** Twilio, Firebase Cloud Messaging
-- **Privacy:** No cloud audio storage
+Behavior and privacy
+- This prototype simulates on-device detection and alerting to demonstrate interaction flows. It does not send real alerts.
+- A production implementation must perform audio/sensor processing on-device (or only with explicit user consent), require explicit permissions for location and contacts, and store/share sensitive data only with informed consent and secure handling.
 
-## Demo Scenario
-1. Simulate a fall (shake/drop phone)
-2. App detects impact + silence
-3. Voice prompt: “Are you okay?”
-4. No response → SMS alert sent
-5. Caregiver receives alert with location
+Tech stack (prototype)
+- Frontend: Static HTML/CSS/JS
+- Mobile (production): Kotlin / Flutter + TensorFlow Lite for on-device inference
+- Notifications/Alerts (production): Twilio, FCM/APNs, or carrier-grade services (with privacy and legal review)
 
-## Pitch Summary
-Every year, millions of elderly people fall or suffer heart attacks alone — unable to reach for help. SeniorSync is an AI guardian that listens for distress through everyday sensors — your phone’s mic and motion data — and detects emergencies before it’s too late. When silence becomes dangerous, SeniorSync speaks up. Because not every emergency gets a call.
+Next steps to production
+- Implement secure on-device feature extraction and TFLite model integration
+- Build native mobile app to access sensors reliably and manage background processing and power usage
+- Design consent flows, privacy policy, and caregiver onboarding
+- Conduct user testing with older adults and caregivers and iterate on accessibility and UX
 
+Suggested commit
+```
+git init
+git add .
+git commit -m "Senior Sync: web prototype — interactive detection and alert simulation"
+```
+
+If you'd like, I can:
+- Create a short demo GIF or MP4 from the UI for onboarding
+- Draft a privacy-first technical appendix describing on-device processing and data minimization
+- Generate a 3-slide pitch or product one-pager aimed at caregivers and clinical partners
+# CareCall — Web Demo
+This is a simple web demo of CareCall (hackathon prototype). It simulates background monitoring, a voice prompt, and escalation to alerts.
+
+Files:
+- index.html — single-page demo
+- style.css — styling
+- app.js — simulation logic
+- demo.gif — short demo animation
+- screenshots — three PNG screenshots showing app states
+
+How to run locally:
+1. Unzip `carecall_web.zip` and open `index.html` in your browser (no server required).
+2. Click **Simulate Fall** / **Simulate Prolonged Silence** / **Simulate Distressed Breathing** to see the flow.
+3. Use **Respond "I'm fine"** to cancel, or **No response** to escalate.
+
+Suggested commit:
+```
+git init
+```markdown
+# Senior Sync — Web Prototype
+"When silence becomes a cry for help — Senior Sync listens."
+
+Senior Sync is a privacy-first prototype designed to assist older adults and caregivers by detecting potential emergencies using phone sensors and lightweight on-device ML.
+
+Files:
+- `index.html` — landing page and interactive prototype
+- `style.css` — styling and responsive layout
+- `app.js` — simulation of detection, voice prompt, and escalation
+- `screenshots/` — optional PNG screenshots demonstrating UI states
+
+Quick run (no server required):
+1. Open `index.html` in your browser.
+2. Click a simulation button: **Simulate Fall**, **Simulate Silence**, or **Simulate Breathing**.
+3. When the voice prompt appears, click **I'm fine** to cancel or **No response** to escalate the simulated alert.
+
+Notes:
+- This web prototype simulates detection and alerting flows for demonstration and user testing. A production mobile app would implement on-device ML (TensorFlow Lite), robust sensor fusion, permissioned location and alert delivery, and strict privacy protections (no cloud audio storage without consent).
+- If your browser supports the Web Speech API, the demo will vocalize the prompt and alert messages for a more realistic experience.
+
+Suggested commit message:
+```
+git init
+git add .
+git commit -m "Senior Sync: web prototype — interactive detection and alert simulation"
+```
+
+Suggested deliverables for deployment or user testing:
+- This prototype (index.html, app.js, style.css)
+- A short demo video or GIF for onboarding and stakeholder review
+- User testing notes and privacy policy draft
+
+```

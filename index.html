@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Senior Sync — Web Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+  <div class="container">
+    <header class="site-header">
+      <div class="brand">
+        <img id="site-logo" class="logo-img" src="C:\Users\Dell\Desktop\seniorsynclogo.jpg" alt="seniorsynclogo" />
+        <div>
+          <h1>Senior Sync</h1>
+          <p class="tagline">When silence becomes a cry for help — Senior Sync listens.</p>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="events.html">Events</a>
+        <a href="settings.html">Settings</a>
+        <a href="team.html">Team</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="about.html" class="cta">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero card big-hero">
+        <div class="hero-left">
+          <h2 class="hero-title">A subtle guardian for everyday life.</h2>
+          <p class="lead">Senior Sync uses private, on-device sensor fusion to detect signs of distress, check in with a calm voice, and notify caregivers with context if needed.</p>
+          <div class="hero-actions">
+            <a class="button" href="dashboard.html">Open Dashboard</a>
+            <a class="button secondary" href="events.html">View Events</a>
+          </div>
+          <div class="feature-row">
+            <div class="feature">
+              <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 100 20 10 10 0 000-20zM11 6h2v7h-2zM11 15h2v2h-2z"/></svg>
+              <div>
+                <strong>Privacy-first</strong>
+                <div class="muted">All processing simulated on-device</div>
+              </div>
+            </div>
+            <div class="feature">
+              <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3l9 6-9 6-9-6 9-6zm0 13l9-6v7a2 2 0 01-2 2H5a2 2 0 01-2-2v-7l9 6z"/></svg>
+              <div>
+                <strong>Sensor fusion</strong>
+                <div class="muted">Microphone + motion + behavior fingerprinting</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="device-mock card spotlight">
+            <h3>Live monitor</h3>
+            <p id="status">Idle — ready</p>
+            <div class="controls">
+              <button id="simulate-fall">Simulate Fall</button>
+              <button id="simulate-silence">Simulate Silence</button>
+              <button id="simulate-breath">Simulate Breathing</button>
+            </div>
+            <div id="activity-chart-small" style="height:120px;margin-top:12px"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="card features showcase">
+        <h2>Standout features</h2>
+        <div class="grid">
+          <div class="card feature-tile">
+            <h3>Smart Check-ins</h3>
+            <p>Automatic voice verification before escalating. Users can cancel with a short response.</p>
+          </div>
+          <div class="card feature-tile">
+            <h3>Caregiver Hub</h3>
+            <p>Manage contacts & view event history from the Dashboard and Events pages.</p>
+          </div>
+          <div class="card feature-tile">
+            <h3>Privacy Controls</h3>
+            <p>Settings let you tune sensitivity and manage local data—friendly defaults for older adults.</p>
+          </div>
+          <div class="card feature-tile">
+            <h3>Actionable Alerts</h3>
+            <p>Alerts include context and location for faster response from caregivers or EMS.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card testimonials">
+        <h2>Real-world impact (prototype)</h2>
+        <div class="testimonial-grid">
+          <blockquote>
+            "The voice prompt saved my dad from a longer delay — he could respond easily." <cite>— Caregiver (prototype tester)</cite>
+          </blockquote>
+          <blockquote>
+            "Love the privacy-first approach — no recordings were stored during testing." <cite>— Research partner</cite>
+          </blockquote>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <small>Senior Sync — Web prototype for older adults & caregivers. For testing and user research only.</small>
+      </div>
+      <div class="credits">Tech: TFLite • Android sensors • Twilio • Privacy-first</div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // small activity chart on home
+    document.addEventListener('DOMContentLoaded', ()=>{
+      if(window.SeniorSync){
+        const el = document.getElementById('activity-chart-small');
+        if(el) SeniorSync.renderSparkline(el, {width: el.clientWidth, height:120});
+      }
+    })
+  </script>
+</body>
+</html>

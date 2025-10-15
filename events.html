@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Senior Sync — Events</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <div class="brand">
+        <img id="site-logo" class="logo-img" src="C:\Users\Dell\Desktop\seniorsynclogo.jpg" alt="seniorsynclogo" />
+        <div>
+          <h1>Senior Sync</h1>
+          <p class="tagline">Event log & history</p>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="events.html">Events</a>
+        <a href="settings.html">Settings</a>
+        <a href="about.html" class="cta">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Events Log</h2>
+        <p class="lead">All recorded alerts and monitoring events. Export or clear for privacy-aware testing.</p>
+        <div class="controls">
+          <button id="export-json">Export JSON</button>
+          <button id="clear-logs" class="secondary">Clear Logs</button>
+        </div>
+
+        <div class="card" id="log-card">
+          <ul id="log-list" class="events-list"></ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <small>Senior Sync — Web prototype for older adults & caregivers.</small>
+      </div>
+      <div class="credits">Tech: TFLite • Android sensors • Twilio (alerts) • Privacy-first</div>
+    </footer>
+  </div>
+
+<script src="app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', ()=>{
+    function render(){
+      const logs = window.SeniorSync? SeniorSync.getAll() : [];
+      const list = document.getElementById('log-list');
+      if(!logs.length) list.innerHTML = '<li class="muted">No events recorded yet.</li>'
+      else list.innerHTML = logs.map(l=>`<li><strong>${l.level}</strong> — ${l.reason} <span class="muted">(${new Date(l.ts).toLocaleString()})</span></li>`).join('')
+    }
+    render();
+
+    document.getElementById('export-json').onclick = ()=>{
+      const data = SeniorSync.getAll();
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'senior-sync-events.json'; a.click(); URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('clear-logs').onclick = ()=>{
+      if(confirm('Clear all logs from this device? This cannot be undone.')){ SeniorSync.clear(); render(); }
+    }
+  })
+</script>
+</body>
+</html>

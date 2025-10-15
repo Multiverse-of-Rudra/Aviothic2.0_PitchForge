@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Senior Sync — Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <div class="brand">
+       <img id="site-logo" class="logo-img" src="C:\Users\Dell\Desktop\seniorsynclogo.jpg" alt="seniorsynclogo" />
+        <div>
+          <h1>Senior Sync</h1>
+          <p class="tagline">Monitoring & care insights</p>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="events.html">Events</a>
+        <a href="settings.html">Settings</a>
+        <a href="about.html" class="cta">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Care Dashboard</h2>
+        <p class="lead">Summary of recent activity and alerts.</p>
+        <div class="grid">
+          <div class="stat card">
+            <h3 id="stat-alerts">0</h3>
+            <p>Alerts (last 7 days)</p>
+          </div>
+          <div class="stat card">
+            <h3 id="stat-resolved">0</h3>
+            <p>Resolved</p>
+          </div>
+          <div class="stat card">
+            <h3 id="stat-active">0</h3>
+            <p>Active monitoring</p>
+          </div>
+        </div>
+
+        <div class="card" id="recent-card">
+          <h3>Recent events</h3>
+          <ul id="recent-list" class="events-list"></ul>
+        </div>
+        <div class="card">
+          <h3>Quick actions</h3>
+          <div class="controls">
+            <button id="panic-btn" class="button" style="background:#c62828">Panic — Notify caregivers</button>
+            <button id="notify-btn" class="secondary">Notify caregivers (context)</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <small>Senior Sync — Web prototype for older adults & caregivers.</small>
+      </div>
+      <div class="credits">Tech: TFLite • Android sensors • Twilio (alerts) • Privacy-first</div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // populate dashboard stats from localStorage via shared functions
+    document.addEventListener('DOMContentLoaded', ()=>{
+      if(window.SeniorSync){
+        const stats = SeniorSync.stats();
+        document.getElementById('stat-alerts').textContent = stats.total;
+        document.getElementById('stat-resolved').textContent = stats.resolved;
+        document.getElementById('stat-active').textContent = stats.active? 'Yes' : 'No';
+        const recent = SeniorSync.getRecent(5);
+        const list = document.getElementById('recent-list');
+        list.innerHTML = recent.map(r=>`<li><strong>${r.level}</strong> — ${r.reason} <span class="muted">(${new Date(r.ts).toLocaleString()})</span></li>`).join('')
+      }
+    })
+  </script>
+</body>
+</html>

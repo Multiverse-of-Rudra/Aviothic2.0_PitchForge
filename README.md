@@ -2,6 +2,12 @@
 
 **Tagline:**
 > When silence becomes a cry for help — SeniorSync listens.
+**Team name-Pitchforge"
+> members:
+> sahil gautam
+> sarthak kushwaha
+> prankur verma
+> Rudra Mohan Mishra(Team Leader)
 
 ## Overview
 SeniorSync is an AI-powered guardian app for elderly safety. It detects emergencies (falls, silence, distress) using your phone’s sensors and microphone, and automatically alerts caregivers if something’s wrong.
@@ -36,3 +42,4 @@ SeniorSync is an AI-powered guardian app for elderly safety. It detects emergenc
 
 ## Pitch Summary
 Every year, millions of elderly people fall or suffer heart attacks alone — unable to reach for help. SeniorSync is an AI guardian that listens for distress through everyday sensors — your phone’s mic and motion data — and detects emergencies before it’s too late. When silence becomes dangerous, SeniorSync speaks up. Because not every emergency gets a call.
+
